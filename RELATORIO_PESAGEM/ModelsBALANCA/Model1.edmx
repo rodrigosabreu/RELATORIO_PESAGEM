@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BALANCATRANSBORDOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CACAMBA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CACAMBA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="100" />
+          <Property Name="ENDERECO" Type="varchar" MaxLength="100" />
+          <Property Name="NUMERO" Type="int" />
+          <Property Name="COMPLEMENTO" Type="varchar" MaxLength="50" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="50" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="2" />
+          <Property Name="CEP" Type="varchar" MaxLength="7" />
+          <Property Name="IE" Type="varchar" MaxLength="50" />
+          <Property Name="CNPJ" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CLIENTEUSUARIO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcliente" Type="int" />
+          <Property Name="idusuario" Type="int" />
+        </EntityType>
+        <EntityType Name="PESAGEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLACA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CACAMBA" Type="varchar" MaxLength="50" />
+          <Property Name="NUMEROFROTA" Type="int" />
+          <Property Name="MOTORISTA" Type="varchar" MaxLength="50" />
+          <Property Name="TRANSPORTADORA" Type="int" />
+          <Property Name="PRODUTO" Type="int" />
+          <Property Name="CLIENTE" Type="int" />
+          <Property Name="PESOTOTAL" Type="bigint" />
+          <Property Name="PESOTARA" Type="bigint" />
+          <Property Name="PESOLIQUIDO" Type="bigint" />
+          <Property Name="DATAPESAGEM" Type="datetime" />
+          <Property Name="PESOTOTAL2" Type="bigint" />
+          <Property Name="DATAPESAGEM2" Type="datetime" />
+          <Property Name="STATUS" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+          <Property Name="DATA_ALTERACAO" Type="datetime" />
+          <Property Name="TIPOPESAGEM" Type="varchar" MaxLength="50" />
+          <Property Name="ATIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMEPROD" Type="varchar" MaxLength="50" />
+          <Property Name="OBS" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TRANSPORTADORA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMETRANS" Type="varchar" MaxLength="100" />
+          <Property Name="ENDERECO" Type="varchar" MaxLength="100" />
+          <Property Name="NUMERO" Type="int" />
+          <Property Name="COMPLEMENTO" Type="varchar" MaxLength="100" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="100" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="2" />
+          <Property Name="CEP" Type="varchar" MaxLength="10" />
+          <Property Name="IE" Type="varchar" MaxLength="100" />
+          <Property Name="CNPJ" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+          <Property Name="cargo" Type="varchar" MaxLength="100" />
+          <Property Name="nomeusuario" Type="varchar" MaxLength="50" />
+          <Property Name="senha" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="VEICULO">
+          <Key>
+            <PropertyRef Name="PLACA" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLACA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TRANSPORTADORA" Type="int" />
+          <Property Name="MARCA" Type="varchar" MaxLength="50" />
+          <Property Name="MODELO" Type="varchar" MaxLength="50" />
+          <Property Name="ANO" Type="bigint" />
+          <Property Name="PESOTARA" Type="bigint" />
+          <Property Name="UTILIZARTARA" Type="varchar" MaxLength="3" />
+          <Property Name="FROTA" Type="bigint" />
+          <Property Name="CACAMBA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="RelatorioFechamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFirst" Type="datetime" Mode="In" />
+          <Parameter Name="DateLast" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="BALANCATRANSBORDOModelStoreContainer">
+          <EntitySet Name="CACAMBA" EntityType="Self.CACAMBA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTEUSUARIO" EntityType="Self.CLIENTEUSUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PESAGEM" EntityType="Self.PESAGEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUTO" EntityType="Self.PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSPORTADORA" EntityType="Self.TRANSPORTADORA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VEICULO" EntityType="Self.VEICULO" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BALANCATRANSBORDOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CACAMBA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CACAMBA1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ENDERECO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="Int32" />
+          <Property Name="COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIDADE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="IE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNPJ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRODUTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMEPROD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OBS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TRANSPORTADORA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMETRANS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ENDERECO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="Int32" />
+          <Property Name="COMPLEMENTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CIDADE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CNPJ" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nomeusuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="senha" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="BALANCATRANSBORDOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CACAMBA" EntityType="Self.CACAMBA" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="PRODUTO" EntityType="Self.PRODUTO" />
+          <EntitySet Name="TRANSPORTADORA" EntityType="Self.TRANSPORTADORA" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="CLIENTEUSUARIO" EntityType="BALANCATRANSBORDOModel.CLIENTEUSUARIO" />
+          <EntitySet Name="PESAGEM" EntityType="BALANCATRANSBORDOModel.PESAGEM" />
+          <EntitySet Name="VEICULO" EntityType="BALANCATRANSBORDOModel.VEICULO" />
+          <FunctionImport Name="RelatorioFechamento" ReturnType="Collection(BALANCATRANSBORDOModel.RelatorioFechamento_Result)">
+            <Parameter Name="DateFirst" Mode="In" Type="DateTime" />
+            <Parameter Name="DateLast" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="CLIENTEUSUARIO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcliente" Type="Int32" />
+          <Property Name="idusuario" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PESAGEM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLACA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CACAMBA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMEROFROTA" Type="Int32" />
+          <Property Name="MOTORISTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSPORTADORA" Type="Int32" />
+          <Property Name="PRODUTO" Type="Int32" />
+          <Property Name="CLIENTE" Type="Int32" />
+          <Property Name="PESOTOTAL" Type="Int64" />
+          <Property Name="PESOTARA" Type="Int64" />
+          <Property Name="PESOLIQUIDO" Type="Int64" />
+          <Property Name="DATAPESAGEM" Type="DateTime" Precision="3" />
+          <Property Name="PESOTOTAL2" Type="Int64" />
+          <Property Name="DATAPESAGEM2" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA_ALTERACAO" Type="DateTime" Precision="3" />
+          <Property Name="TIPOPESAGEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ATIVO" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VEICULO">
+          <Key>
+            <PropertyRef Name="PLACA" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLACA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSPORTADORA" Type="Int32" />
+          <Property Name="MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ANO" Type="Int64" />
+          <Property Name="PESOTARA" Type="Int64" />
+          <Property Name="UTILIZARTARA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FROTA" Type="Int64" />
+          <Property Name="CACAMBA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="RelatorioFechamento_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="nome_cliente" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="quantidade_de_pesagens" Nullable="true" />
+          <Property Type="Int64" Name="total_peso_liquido" Nullable="true" />
+          <Property Type="Int32" Name="pesagens_nao_concluídas" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BALANCATRANSBORDOModelStoreContainer" CdmEntityContainer="BALANCATRANSBORDOEntities">
+          <EntitySetMapping Name="CACAMBA">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.CACAMBA">
+              <MappingFragment StoreEntitySet="CACAMBA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CACAMBA1" ColumnName="CACAMBA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="ENDERECO" ColumnName="ENDERECO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="COMPLEMENTO" ColumnName="COMPLEMENTO" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="IE" ColumnName="IE" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUTO">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.PRODUTO">
+              <MappingFragment StoreEntitySet="PRODUTO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMEPROD" ColumnName="NOMEPROD" />
+                <ScalarProperty Name="OBS" ColumnName="OBS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSPORTADORA">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.TRANSPORTADORA">
+              <MappingFragment StoreEntitySet="TRANSPORTADORA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMETRANS" ColumnName="NOMETRANS" />
+                <ScalarProperty Name="ENDERECO" ColumnName="ENDERECO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="COMPLEMENTO" ColumnName="COMPLEMENTO" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="IE" ColumnName="IE" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="nomeusuario" ColumnName="nomeusuario" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTEUSUARIO">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.CLIENTEUSUARIO">
+              <MappingFragment StoreEntitySet="CLIENTEUSUARIO">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PESAGEM">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.PESAGEM">
+              <MappingFragment StoreEntitySet="PESAGEM">
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
+                <ScalarProperty Name="TIPOPESAGEM" ColumnName="TIPOPESAGEM" />
+                <ScalarProperty Name="DATA_ALTERACAO" ColumnName="DATA_ALTERACAO" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="DATAPESAGEM2" ColumnName="DATAPESAGEM2" />
+                <ScalarProperty Name="PESOTOTAL2" ColumnName="PESOTOTAL2" />
+                <ScalarProperty Name="DATAPESAGEM" ColumnName="DATAPESAGEM" />
+                <ScalarProperty Name="PESOLIQUIDO" ColumnName="PESOLIQUIDO" />
+                <ScalarProperty Name="PESOTARA" ColumnName="PESOTARA" />
+                <ScalarProperty Name="PESOTOTAL" ColumnName="PESOTOTAL" />
+                <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
+                <ScalarProperty Name="PRODUTO" ColumnName="PRODUTO" />
+                <ScalarProperty Name="TRANSPORTADORA" ColumnName="TRANSPORTADORA" />
+                <ScalarProperty Name="MOTORISTA" ColumnName="MOTORISTA" />
+                <ScalarProperty Name="NUMEROFROTA" ColumnName="NUMEROFROTA" />
+                <ScalarProperty Name="CACAMBA" ColumnName="CACAMBA" />
+                <ScalarProperty Name="PLACA" ColumnName="PLACA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VEICULO">
+            <EntityTypeMapping TypeName="BALANCATRANSBORDOModel.VEICULO">
+              <MappingFragment StoreEntitySet="VEICULO">
+                <ScalarProperty Name="CACAMBA" ColumnName="CACAMBA" />
+                <ScalarProperty Name="FROTA" ColumnName="FROTA" />
+                <ScalarProperty Name="UTILIZARTARA" ColumnName="UTILIZARTARA" />
+                <ScalarProperty Name="PESOTARA" ColumnName="PESOTARA" />
+                <ScalarProperty Name="ANO" ColumnName="ANO" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="TRANSPORTADORA" ColumnName="TRANSPORTADORA" />
+                <ScalarProperty Name="PLACA" ColumnName="PLACA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RelatorioFechamento" FunctionName="BALANCATRANSBORDOModel.Store.RelatorioFechamento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BALANCATRANSBORDOModel.RelatorioFechamento_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome_cliente" ColumnName="nome_cliente" />
+                <ScalarProperty Name="quantidade_de_pesagens" ColumnName="quantidade_de_pesagens" />
+                <ScalarProperty Name="total_peso_liquido" ColumnName="total_peso_liquido" />
+                <ScalarProperty Name="pesagens_nao_concluídas" ColumnName="pesagens_nao_concluídas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

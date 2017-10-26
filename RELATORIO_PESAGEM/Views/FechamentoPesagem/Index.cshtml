@@ -1,0 +1,94 @@
+﻿@model IEnumerable<RELATORIO_PESAGEM.ModelsBALANCA.RelatorioFechamento_Result>
+
+
+<script src="~/Scripts2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+@{
+    ViewBag.Title = "Fechamento de Pesagens";
+}
+
+<h2>Fechamento de Pesagens</h2>
+
+
+
+@using (Html.BeginForm("Index", "FechamentoPesagem", new { pagina = 1 }))
+{
+    <p>
+        Data Inicial: @Html.TextBox("data1", ViewBag.data1 as string)    Data Final: @Html.TextBox("data2", ViewBag.data2 as string)
+        <input type="submit" value="Filtrar" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+           @Html.DisplayName("NOME DO CLIENTE")
+        </th>
+        <th>
+            @Html.DisplayName("QUANTIDADE DE PESAGENS")
+        </th>
+        <th>
+           @Html.DisplayName("PESO LIQUÍDO KG")
+        </th>
+        <th>
+            @Html.DisplayName("PESAGENS NÃO CONCLUÍDAS")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome_cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantidade_de_pesagens)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_peso_liquido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pesagens_nao_concluídas)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Exportar: ", "Excel", new { clienteID=item.id, data1= @ViewBag.data1, data2 = @ViewBag.data2 })
+            @ViewBag.data1 até @ViewBag.data2
+            
+        </td>
+    </tr>
+}
+
+</table>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $("#data1").datepicker({
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        dateFormat: 'dd/mm/yy',
+        nextText: 'Próximo',
+        prevText: 'Anterior'
+    });
+
+    $("#data2").datepicker({
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        dateFormat: 'dd/mm/yy',
+        nextText: 'Próximo',
+        prevText: 'Anterior'
+    });
+
+
+});
+
+
+</script>

@@ -1,0 +1,172 @@
+﻿@model PagedList.IPagedList<RELATORIO_PESAGEM.Controllers.RelatorioPesagemController.relatorio>
+@using PagedList.Mvc
+
+
+
+<script src="~/Scripts2/jquery-ui.js"></script>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+@ViewBag.Javascript
+
+@{
+    
+    ViewBag.Title = "RELATÓRIO DE PESAGEM - PIONEIRA";
+}
+
+<h2>RELATÓRIO DE PESAGEM</h2>
+
+    
+    @using (Html.BeginForm("Index", "RelatorioPesagem", new { pagina = 1 }))
+    {        
+        <p>
+            Data Inicial: @Html.TextBox("data1", ViewBag.data1 as string)    Data Final: @Html.TextBox("data2", ViewBag.data2 as string)  
+            <input type="submit" value="Filtrar" /> Total de Pesagens: @ViewBag.totalPesagens
+        </p>
+    }
+
+
+        
+    
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("TICKET")
+        </th>
+        <th>
+            @Html.DisplayName("BALANCEIRO")
+        </th>  
+
+        <th>
+            @Html.DisplayName("PLACA DO VEÍCULO")
+        </th>  
+
+        <th>
+            @Html.DisplayName("TIPO DO VEÍCULO")
+        </th> 
+        <th>
+            @Html.DisplayName("MOTORISTA")
+        </th> 
+        <th>
+            @Html.DisplayName("TRANSPORTADORA")
+        </th> 
+        <th>
+            @Html.DisplayName("PRODUTO")
+        </th> 
+        <th>
+            @Html.DisplayName("CLIENTE")
+        </th> 
+        <th>
+            @Html.DisplayName("DATA ENTRADA")
+        </th> 
+        <th>
+            @Html.DisplayName("DATA SAÍDA")
+        </th>
+        <th>
+            @Html.DisplayName("PESO TARA")
+        </th>
+        <th>
+            @Html.DisplayName("PESO ENTRADA")
+        </th>
+        <th>
+            @Html.DisplayName("PESO SAÍDA")
+        </th>
+
+        <th>
+            @Html.DisplayName("PESO LIQUÍDO")
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TICKET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BALANCEIRO)
+        </td>  
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PLACA)
+        </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.CACAMBA)
+        </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.MOTORISTA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRANSPORTADORA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLIENTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATAENTRADA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATASAIDA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PESOTARA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PESOENTRADA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PESOSAIDA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PESOLIQUIDO)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
+
+<br>
+
+Página @Model.PageNumber de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new {data1 = ViewBag.data1, data2 = ViewBag.data2, pagina = page }))
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $("#data1").datepicker({
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        dateFormat: 'dd/mm/yy',
+        nextText: 'Próximo',
+        prevText: 'Anterior'
+    });
+
+    $("#data2").datepicker({
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        dateFormat: 'dd/mm/yy',
+        nextText: 'Próximo',
+        prevText: 'Anterior'
+    });
+
+
+});
+
+
+</script>
